@@ -167,7 +167,11 @@ def select_device(adb: Adb) -> str:
         )
     if len(devices) > 1:
         listing = ", ".join(f"{d['serial']} ({d['state']})" for d in devices)
-        raise AdbError(f"more than one device is connected; pass --serial. Connected: {listing}")
+        raise AdbError(
+            f"more than one device is connected; pass --serial. Connected: {listing}. "
+            "A phone on Wi-Fi debugging is often listed twice (ip:port and an adb-...._adb-tls-connect "
+            "name): that is one device, use --serial <ip:port>."
+        )
     _assert_ready(devices[0])
     adb.serial = devices[0]["serial"]
     return adb.serial
@@ -563,6 +567,8 @@ class Record:
 
 
 def disable_package(adb: Adb, pkg: str, allow_uninstall: bool) -> Action:
+    # Success is judged on the text, never the exit code: ColorOS/OxygenOS answers a refusal with
+    # "Package X new state: default" and exit 0; Samsung with a SecurityException and exit 0.
     out = adb.shell(f"pm disable-user --user {USER} {pkg}", check=False)
     if "new state: disabled" in out:
         return Action(pkg, "disable", True, out.strip())
@@ -799,6 +805,8 @@ def cmd_probe(args: argparse.Namespace) -> int:
     print(f"Home:        {state.home}")
     print(f"Keyboard:    {state.ime}")
     for role, holders in state.roles.items():
+        if role == "android.app.role.HOME" and holders == [state.home]:
+            continue
         print(f"{ROLES.get(role, role).capitalize() + ':':<13}{', '.join(holders)}")
     print(f"Protected:   {len(protected)} packages will never be touched")
     return 0
@@ -981,12 +989,45 @@ def cmd_lookup(args: argparse.Namespace) -> int:
     return 0
 
 
+def parse_mdns_services(out: str) -> Dict[str, List[str]]:
+    """`adb mdns services` -> {"pairing": [ip:port, ...], "connect": [ip:port, ...]}."""
+    found: Dict[str, List[str]] = {"pairing": [], "connect": []}
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) < 3 or ":" not in parts[-1]:
+            continue
+        service, addr = parts[1], parts[-1]
+        if "_adb-tls-pairing" in service:
+            found["pairing"].append(addr)
+        elif "_adb-tls-connect" in service or "_adb._tcp" in service:
+            found["connect"].append(addr)
+    return found
+
+
 def cmd_connect(args: argparse.Namespace) -> int:
     adb = make_adb(args)
-    if args.pair:
-        print(adb.run("pair", args.pair, args.code or "", check=False).strip())
-    target = args.host if ":" in args.host else f"{args.host}:5555"
+    pair_target = args.pair
+    host = args.host
+    if args.discover or not host:
+        services = parse_mdns_services(adb.run("mdns", "services", check=False))
+        if not services["connect"] and not services["pairing"]:
+            raise AdbError("no device advertises Wi-Fi debugging on this network. On the phone: "
+                           "Developer options > Wireless debugging > on, then 'Pair device with "
+                           "pairing code' and pass --code.")
+        if args.code and not pair_target and services["pairing"]:
+            pair_target = services["pairing"][0]
+        if not host and services["connect"]:
+            host = services["connect"][0]
+        print(f"Discovered: pairing={services['pairing'] or '-'} connect={services['connect'] or '-'}")
+    if pair_target:
+        if not args.code:
+            raise AdbError("--pair needs --code (the six-digit code shown on the phone)")
+        print(adb.run("pair", pair_target, args.code, check=False).strip())
+    if not host:
+        raise AdbError("nothing to connect to: pass a host or run --discover with Wireless debugging on")
+    target = host if ":" in host else f"{host}:5555"
     print(adb.run("connect", target, check=False).strip())
+    print(f"Use --serial {target} for the other commands.")
     return 0
 
 
@@ -1045,7 +1086,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.set_defaults(func=cmd_lookup)
 
     p = sub.add_parser("connect", help="adb connect (and pair) over Wi-Fi")
-    p.add_argument("host", help="ip or ip:port of the device")
+    p.add_argument("host", nargs="?", help="ip or ip:port of the device (omit with --discover)")
+    p.add_argument("--discover", action="store_true",
+                   help="find the pairing/connect ports with `adb mdns services` (same Wi-Fi)")
     p.add_argument("--pair", help="ip:port shown under 'Pair device with pairing code'")
     p.add_argument("--code", help="the six-digit pairing code")
     p.set_defaults(func=cmd_connect)

@@ -5,10 +5,11 @@ any Android phone or tablet over ADB. No root, nothing uninstalled from the syst
 undone by one command. Built to be driven by a coding agent: point Claude Code, Codex, Hermes or
 Gemini CLI at this repository and say "clean up my phone".
 
-> Status: early. The engine is tested against a simulated device (24 behaviour tests) and the
-> package lists are cross-checked against the community UAD list, but the author has not yet run
-> it on physical hardware. Reports from real devices are the most useful contribution right now;
-> see [CONTRIBUTING.md](CONTRIBUTING.md).
+> Status: early but real. Verified end to end on one physical device (OnePlus CPH2487, OxygenOS 16 /
+> Android 16: probe, backup, plan, apply, drift check, restore, re-apply), 28 behaviour tests
+> against a simulated device, and package lists cross-checked against the community UAD list. Other
+> OEMs are community-verified, not yet device-verified: reports from real devices are the most
+> useful contribution right now; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Why
 
@@ -68,16 +69,19 @@ python3 tools/debloat.py check --record backups/record-<model>-<time>.json --fix
 python3 tools/debloat.py lookup glance bixby --device   # what is this package?
 ```
 
-Python 3.9+ and `adb`. No other dependencies. Wi-Fi instead of a cable:
-`python3 tools/debloat.py connect 192.168.1.23 --pair 192.168.1.23:37099 --code 123456`.
+Python 3.9+ and `adb`. No other dependencies. Wi-Fi instead of a cable: turn on Wireless
+debugging on the phone, open "Pair device with pairing code", then
+`python3 tools/debloat.py connect --discover --code 123456` (it finds the ports itself on the same
+Wi-Fi) and use the `--serial ip:port` it prints for every other command.
 
 ## Devices
 
 | Device | Profile | Status |
 |---|---|---|
+| OnePlus CPH2487, OxygenOS 16 (Android 16) | `oppo.txt` + generic | **device-verified**: full loop incl. restore. OxygenOS refuses to disable its App Market; everything else applied. |
+| Other OnePlus, OPPO, realme (ColorOS, OxygenOS) | `oppo.txt` | lists community-verified |
 | Samsung (One UI) | `data/profiles/samsung.txt` + generic | lists community-verified, awaiting device reports |
 | Xiaomi, Redmi, POCO (MIUI, HyperOS) | `xiaomi.txt` | same |
-| OnePlus, OPPO, realme (ColorOS, OxygenOS) | `oppo.txt` | same |
 | vivo, iQOO | `vivo.txt` | same |
 | Motorola | `motorola.txt` | same |
 | Google Pixel | `google.txt` | same |
@@ -123,8 +127,10 @@ flagship as boring as a Light Phone, each with its undo, in
 
 ## Development
 
+[![CI](https://github.com/DoAideAi/DoAide-Debloat/actions/workflows/ci.yml/badge.svg)](https://github.com/DoAideAi/DoAide-Debloat/actions/workflows/ci.yml)
+
 ```sh
-python3 -m unittest discover -s tests -v      # 24 tests against a scripted fake device
+python3 -m unittest discover -s tests -v      # 28 tests against a scripted fake device
 python3 tools/validate_lists.py --uad         # list syntax, duplicates, never-disable overlap, UAD cross-check
 ```
 

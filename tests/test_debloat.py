@@ -55,12 +55,13 @@ class FakeDevice:
     """Just enough of `adb` to drive the tool. Mutations are recorded in `log`."""
 
     def __init__(self, props=None, packages=None, disabled=(), refuse_disable=(), serial="FAKE123",
-                 roles=True):
+                 roles=True, refuse_style="samsung"):
         self.props = dict(props or SAMSUNG_PROPS)
         self.packages = {p: {"installed": True, "enabled": True} for p in (packages or BASE_PACKAGES)}
         for p in disabled:
             self.packages[p]["enabled"] = False
         self.refuse_disable = set(refuse_disable)
+        self.refuse_style = refuse_style
         self.serial = serial
         self.roles_supported = roles
         self.log = []
@@ -118,6 +119,8 @@ class FakeDevice:
             if pkg not in self.packages or not self.packages[pkg]["installed"]:
                 return 0, f"Error: java.lang.IllegalArgumentException: Unknown package: {pkg}\n"
             if pkg in self.refuse_disable:
+                if self.refuse_style == "coloros":   # seen on OxygenOS 16: exit 0, state unchanged
+                    return 0, f"Package {pkg} new state: default\n"
                 return 0, f"Error: java.lang.SecurityException: Cannot disable a protected package: {pkg}\n"
             self.packages[pkg]["enabled"] = False
             return 0, f"Package {pkg} new state: disabled-user\n"
@@ -356,6 +359,17 @@ class ApplyRestoreTests(unittest.TestCase):
         self.assertEqual(home_action.method, "skip")
         self.assertTrue(fake.packages[HOME]["enabled"])
 
+    def test_coloros_silent_refusal_is_a_failure_not_a_success(self):
+        """OxygenOS 16 answers `pm disable-user` on its store with 'new state: default', exit 0."""
+        fake = FakeDevice(refuse_disable=["com.samsung.android.app.spage"], refuse_style="coloros")
+        adb, state, plan, record = self.run_apply(fake)
+        spage = next(a for a in record.actions if a.package == "com.samsung.android.app.spage")
+        self.assertFalse(spage.ok)
+        self.assertEqual(spage.method, "disable")
+        self.assertIn("new state: default", spage.output)
+        self.assertTrue(fake.packages["com.samsung.android.app.spage"]["enabled"])
+        self.assertEqual(debloat.drift(record, debloat.probe_device(adb)), [])   # a failed action is not drift
+
     def test_check_detects_drift_after_update(self):
         fake = FakeDevice()
         adb, state, plan, record = self.run_apply(fake)
@@ -393,6 +407,55 @@ class ListFileTests(unittest.TestCase):
         self.assertEqual(debloat.matches_never("com.samsung.knox.securefolder", patterns), "*knox*")
         self.assertEqual(debloat.matches_never("android", patterns), "android")
         self.assertIsNone(debloat.matches_never("com.glance.internet", patterns))
+
+
+class WifiConnectTests(unittest.TestCase):
+    MDNS = ("List of discovered mdns services\n"
+            "adb-31b2a9b0-WmQRU8\t_adb-tls-pairing._tcp\t192.168.29.40:41123\n"
+            "adb-31b2a9b0-WmQRU8\t_adb-tls-connect._tcp\t192.168.29.40:39477\n")
+
+    def test_parse_mdns_services(self):
+        found = debloat.parse_mdns_services(self.MDNS)
+        self.assertEqual(found, {"pairing": ["192.168.29.40:41123"], "connect": ["192.168.29.40:39477"]})
+        self.assertEqual(debloat.parse_mdns_services("List of discovered mdns services\n"),
+                         {"pairing": [], "connect": []})
+
+    def test_connect_discover_pairs_then_connects(self):
+        calls = []
+
+        def fake_runner(args):
+            calls.append(list(args))
+            if args[:2] == ["mdns", "services"]:
+                return 0, self.MDNS
+            if args[0] == "pair":
+                return 0, f"Successfully paired to {args[1]} [guid=adb-31b2a9b0-WmQRU8]\n"
+            if args[0] == "connect":
+                return 0, f"connected to {args[1]}\n"
+            return 1, "unexpected"
+
+        import contextlib
+        import io
+        buf = io.StringIO()
+        real_adb = debloat.Adb
+        debloat.Adb = lambda serial=None, adb_path=None, runner=None: real_adb(serial=serial, runner=fake_runner)
+        try:
+            with contextlib.redirect_stdout(buf):
+                rc = debloat.main(["connect", "--discover", "--code", "164199"])
+        finally:
+            debloat.Adb = real_adb
+        self.assertEqual(rc, 0, buf.getvalue())
+        self.assertIn(["pair", "192.168.29.40:41123", "164199"], calls)
+        self.assertIn(["connect", "192.168.29.40:39477"], calls)
+        self.assertIn("--serial 192.168.29.40:39477", buf.getvalue())
+
+    def test_two_listings_of_one_wifi_phone_ask_for_serial(self):
+        def runner(args):
+            return 0, ("List of devices attached\n"
+                       "192.168.29.40:39477    device product:CPH2487 model:CPH2487 device:OP5961L1 transport_id:2\n"
+                       "adb-31b2a9b0-WmQRU8._adb-tls-connect._tcp device product:CPH2487 model:CPH2487 device:OP5961L1 transport_id:1\n")
+        with self.assertRaises(debloat.AdbError) as ctx:
+            debloat.select_device(debloat.Adb(runner=runner))
+        self.assertIn("--serial <ip:port>", str(ctx.exception))
 
 
 class CliTests(unittest.TestCase):

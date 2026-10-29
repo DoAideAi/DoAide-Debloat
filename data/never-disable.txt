@@ -198,6 +198,7 @@ com.coloros.ota
 com.oppo.ota
 com.oplus.sau
 com.oplus.sauhelper
+com.oplus.sos
 com.oppo.quicksearchbox
 com.oplus.deepthinker
 

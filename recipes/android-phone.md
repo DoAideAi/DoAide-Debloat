@@ -21,13 +21,17 @@ python3 tools/debloat.py probe
 
 ## Wi-Fi instead of a cable (Android 11+)
 
-Developer options > Wireless debugging > on > *Pair device with pairing code*. The phone shows
-an IP:port and a six-digit code; the *Wireless debugging* screen itself shows a second IP:port
-for connecting.
+Developer options > Wireless debugging > on > *Pair device with pairing code*. The phone shows a
+six-digit code (and an IP:port). On the same Wi-Fi the tool finds the ports by itself:
 
 ```sh
-python3 tools/debloat.py connect 192.168.1.23:41234 --pair 192.168.1.23:37099 --code 123456
+python3 tools/debloat.py connect --discover --code 123456
 ```
+
+It prints the `--serial ip:port` to use afterwards. The phone then appears twice in
+`adb devices -l` (as `ip:port` and as an `adb-...._adb-tls-connect` name): that is one device;
+always pass `--serial ip:port`. Without mDNS, pass the ports by hand:
+`connect 192.168.1.23:41234 --pair 192.168.1.23:37099 --code 123456`.
 
 macOS may block the connection ("No route to host") under Local Network privacy. Allow your
 terminal app in System Settings > Privacy & Security > Local Network, or use a cable.
@@ -48,9 +52,16 @@ phone. The ads come from `com.miui.msa.global`; the lock-screen feed from
 `com.miui.android.fashiongallery` (Wallpaper Carousel) and, in India, `com.glance.internet`.
 After an update, MIUI sometimes re-enables GetApps: `check --fix`.
 
-**OnePlus, OPPO, realme (ColorOS).** If `pm` commands are refused, toggle *Disable permission
-monitoring* in Developer options for the session, then turn it back on. The phone manager,
-OTA and account packages are protected. "Hot apps" notifications come from `com.heytap.market`.
+**OnePlus, OPPO, realme (ColorOS, OxygenOS).** Device-verified on a OnePlus CPH2487 running
+OxygenOS 16: the full loop works over Wi-Fi debugging, with one quirk. The system refuses
+`pm disable-user` on its own App Market (`com.heytap.market`) by answering
+`Package com.heytap.market new state: default` with exit 0, so the tool reports it as failed and
+leaves it alone. The store is also how OnePlus updates its own apps; keeping it is reasonable, and
+`apply --allow-uninstall` is the (reversible) way past it if the owner insists. If other `pm`
+commands are refused, toggle *Disable permission monitoring* in Developer options for the session,
+then turn it back on. The phone manager, OTA, SOS and account packages are protected. "Hot apps"
+notifications come from `com.heytap.market`; the rotating lock-screen images from
+`com.heytap.pictorial`.
 
 **vivo, iQOO.** iManager (`com.iqoo.secure`) and the permission manager are protected; the
 V-Appstore is the usual source of unwanted notifications.
