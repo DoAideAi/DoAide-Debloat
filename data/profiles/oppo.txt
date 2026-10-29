@@ -1,0 +1,38 @@
+# OPPO / OnePlus / realme (ColorOS, OxygenOS, realme UI). Format: package | category | note
+
+# ---- ads and tracking
+com.heytap.market                     | ads       | App Market (HeyTap app store; "hot apps" notifications)
+com.heytap.pictorial                  | ads       | Lock screen magazine (rotating lock-screen content)
+com.nearme.statistics.rom             | telemetry | OPPO usage statistics
+com.nearme.gamecenter                 | junk      | Game Center
+com.oneplus.community                 | junk      | OnePlus Community
+com.coloros.childrenspace             | junk      | Kid Space
+com.coloros.compass2                  | ask       | Compass
+
+# ---- ask
+com.heytap.browser                    | ask       | Browser (HeyTap)
+com.heytap.cloud                      | ask       | HeyTap Cloud
+com.heytap.themestore                 | ask       | Theme Store
+com.heytap.music                      | ask       | Music
+com.heytap.quicksearchbox             | ask       | Global search (with recommendations)
+com.heytap.speechassist               | ask       | Breeno / voice assistant
+com.coloros.speechassist              | ask       | Breeno / voice assistant
+com.coloros.assistantscreen           | ask       | Shelf / Smart Assistant
+com.coloros.smartsidebar              | ask       | Smart Sidebar
+com.coloros.gamespace                 | ask       | Game Space
+com.coloros.gamespaceui               | ask       | Game Space UI
+com.oplus.games                       | ask       | Games
+com.oneplus.gamespace                 | ask       | Game Space (OnePlus)
+com.oneplus.brickmode                 | ask       | Zen Mode
+com.oneplus.note                      | ask       | Notes (OnePlus)
+com.coloros.video                     | ask       | Videos
+com.coloros.weather2                  | ask       | Weather
+com.coloros.weather.service           | ask       | Weather service
+com.coloros.healthcheck               | ask       | Phone diagnostics
+com.coloros.securepay                 | ask       | Payment Protection
+com.coloros.filemanager               | ask       | Files
+com.coloros.calculator                | ask       | Calculator
+com.coloros.soundrecorder             | ask       | Recorder
+com.coloros.screenrecorder            | ask       | Screen Recorder
+com.coloros.ocrscanner                | ask       | Scanner (OCR)
+com.realme.link                       | ask       | realme Link (IoT)

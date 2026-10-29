@@ -1,0 +1,9 @@
+# Motorola. Format: package | category | note
+
+com.motorola.demo                     | junk      | Retail demo mode
+com.motorola.ccc.notification         | telemetry | Motorola notifications (promotions and device reports)
+com.motorola.genie                    | ask       | Device Help / Moto Help
+com.motorola.ccc.ota                  | ask       | System updates (keep unless you never want OTA updates)
+com.motorola.timeweatherwidget        | ask       | Time & weather widget
+com.motorola.moto                     | ask       | Moto app (Moto Actions gestures; keep if you use chop-to-torch etc.)
+com.motorola.gamemode                 | ask       | Gametime

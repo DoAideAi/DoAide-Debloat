@@ -1,0 +1,51 @@
+# Applies to every Android device, on top of the OEM profile.
+# Format: package | category | note      categories: ads, telemetry, junk, ask
+#   ads/telemetry/junk  -> in the plan by default
+#   ask                 -> only when the owner names it with --remove (the agent asks first)
+# A package is only acted on if it is installed and enabled on the device.
+
+# ---- lock-screen and feed ads
+com.glance.internet              | ads       | Glance: "trending" stories and ads on the lock screen (India, SE Asia)
+
+# ---- Facebook stubs preloaded by most OEMs (the real app is com.facebook.katana, which is never listed here)
+com.facebook.system              | junk      | Facebook installer stub (nags you to install Facebook)
+com.facebook.appmanager          | junk      | Facebook background app manager
+com.facebook.services            | telemetry | Facebook Services (background location/interest collection)
+
+# ---- Microsoft preloads
+com.microsoft.skydrive           | ask       | OneDrive
+com.microsoft.office.outlook     | ask       | Outlook
+com.microsoft.office.officehubrow| ask       | Microsoft 365 (Office) hub
+com.microsoft.appmanager         | ask       | Link to Windows
+com.linkedin.android             | ask       | LinkedIn
+
+# ---- Netflix / Spotify / shopping preloads
+com.netflix.partner.activation   | junk      | Netflix partner activation stub
+com.netflix.mediaclient          | ask       | Netflix
+com.spotify.music                | ask       | Spotify
+com.amazon.appmanager            | junk      | Amazon app manager (background updater for preloaded Amazon apps)
+com.amazon.mShop.android.shopping| ask       | Amazon Shopping
+in.amazon.mShop.android.shopping | ask       | Amazon Shopping (India)
+com.booking                      | ask       | Booking.com
+
+# ---- Indian preloads
+com.eterno                       | ask       | Dailyhunt (news feed with notifications)
+com.truecaller                   | ask       | Truecaller
+in.startv.hotstar                | ask       | Hotstar / JioHotstar
+com.phonepe.app                  | ask       | PhonePe
+
+# ---- Google apps that most people never open (your Google account is untouched)
+com.google.android.feedback      | telemetry | Google feedback / crash reporting agent
+com.google.android.printservice.recommendation | ask | Print service recommendations (keep if you print from the phone)
+com.google.android.apps.magazines| ask       | Google News
+com.google.android.videos        | ask       | Google TV (Play Movies)
+com.google.android.apps.tachyon  | ask       | Google Meet (Duo)
+com.google.android.apps.podcasts | ask       | Google Podcasts (discontinued)
+com.google.android.apps.youtube.music | ask  | YouTube Music
+com.google.android.play.games    | ask       | Google Play Games
+com.google.android.apps.wellbeing| ask       | Digital Wellbeing (screen-time limits, bedtime mode)
+com.google.android.projection.gearhead | ask | Android Auto
+com.google.android.apps.walletnfcrel | ask   | Google Wallet (tap to pay)
+com.google.android.apps.nbu.files| ask       | Files by Google
+com.google.android.apps.docs     | ask       | Google Drive
+com.google.android.apps.photos   | ask       | Google Photos (keep if it is your photo backup)

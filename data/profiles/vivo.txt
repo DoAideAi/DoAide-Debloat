@@ -1,0 +1,16 @@
+# vivo / iQOO (Funtouch OS, OriginOS). Format: package | category | note
+
+com.vivo.appstore                     | ads       | V-Appstore (app recommendations and notifications)
+com.vivo.ewarranty                    | junk      | e-Warranty
+com.vivo.hiboard                      | ask       | HiBoard (feed left of the home screen)
+com.vivo.browser                      | ask       | vivo Browser
+com.vivo.easyshare                    | ask       | EasyShare
+com.vivo.gamecube                     | ask       | Game Cube / Ultra Game Mode
+com.vivo.assistant                    | ask       | Jovi Smart Scene
+com.vivo.globalsearch                 | ask       | Global search
+com.bbk.theme                         | ask       | iTheme
+com.bbk.cloud                         | ask       | vivo Cloud
+com.vivo.weather                      | ask       | Weather
+com.vivo.weather.provider             | ask       | Weather provider
+com.vivo.videoeditor                  | ask       | Video editor
+com.vivo.smartshot                    | ask       | S-capture

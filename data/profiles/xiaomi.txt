@@ -1,0 +1,45 @@
+# Xiaomi / Redmi / POCO (MIUI, HyperOS). Format: package | category | note
+
+# ---- system ads and tracking
+com.miui.msa.global                   | ads       | MSA (MIUI System Ads): the ads inside Settings, Security, Cleaner, Themes
+com.miui.systemAdSolution             | ads       | System ad solution (China ROMs)
+com.miui.analytics                    | telemetry | MIUI Analytics
+com.miui.hybrid                       | ads       | Quick Apps (instant apps; source of "hot app" notifications)
+com.miui.hybrid.accessory             | ads       | Quick Apps accessory
+com.xiaomi.mipicks                    | ads       | GetApps (Xiaomi app store; pushes app recommendations)
+com.miui.android.fashiongallery       | ads       | Wallpaper Carousel (Glance lock-screen feed)
+com.xiaomi.joyose                     | ask       | Joyose (GPU tuner / cloud game settings; also reports usage)
+com.miui.bugreport                    | telemetry | Bug report
+com.miui.miservice                    | junk      | Services & Feedback
+com.miui.cleanmaster                  | junk      | Cleaner (ad-supported)
+com.xiaomi.glgm                       | junk      | Xiaomi Games
+com.mi.global.shop                    | junk      | Mi Store (shopping)
+com.mi.global.bbs                     | junk      | Mi Community
+com.miui.touchassistant               | junk      | Quick ball
+com.miui.phrase                       | junk      | Frequent phrases
+com.miui.compass                      | junk      | Compass
+
+# ---- ask: apps people actually use
+com.mi.globalbrowser                  | ask       | Mi Browser
+com.miui.player                       | ask       | Mi Music
+com.miui.videoplayer                  | ask       | Mi Video
+com.mi.android.globalFileexplorer     | ask       | File Manager
+com.miui.weather2                     | ask       | Weather
+com.miui.notes                        | ask       | Notes
+com.miui.calculator                   | ask       | Calculator
+com.miui.fm                           | ask       | FM Radio
+com.miui.screenrecorder               | ask       | Screen Recorder
+com.xiaomi.scanner                    | ask       | Scanner
+com.xiaomi.midrop                     | ask       | ShareMe
+com.miui.mishare.connectivity         | ask       | Mi Share
+com.xiaomi.mi_connect_service         | ask       | Mi Connect service (Mi Share, Mi Home linking)
+com.miui.yellowpage                   | ask       | Yellow pages (caller id)
+com.xiaomi.payment                    | ask       | Mi Pay
+com.miui.huanji                       | ask       | Mi Mover
+com.miui.backup                       | ask       | Backup
+com.miui.cloudservice                 | ask       | Mi Cloud
+com.miui.cloudbackup                  | ask       | Mi Cloud backup
+com.miui.micloudsync                  | ask       | Mi Cloud sync
+com.android.updater                   | ask       | System updater (keep unless you never want OTA updates)
+com.miui.voiceassist                  | ask       | Xiaomi voice assistant
+com.miui.contentextension             | ask       | Taplus (long-press text recognition)

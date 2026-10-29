@@ -1,0 +1,6 @@
+# Google Pixel. Format: package | category | note
+# Pixels carry little bloat; generic.txt covers the Google apps. Only Pixel-specific extras here.
+
+com.google.android.apps.subscriptions.red | ask | Google One
+com.google.android.apps.tycho         | ask       | Google Fi
+com.google.android.apps.youtube.unplugged | ask   | YouTube TV

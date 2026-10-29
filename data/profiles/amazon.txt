@@ -1,0 +1,28 @@
+# Amazon Fire tablets (Fire OS). Format: package | category | note
+# Fire TV sticks and Fire TV Edition televisions are NOT covered here: use https://github.com/humblemuzzu/dumbtv
+# Status: package names collected from community Fire-tablet debloat lists (Fire Toolbox era), not yet
+# re-verified on a device by this project. The usual guards apply: only installed packages are touched.
+
+# ---- ads and tracking
+com.amazon.kindle.kso                 | ads       | Special Offers: the lock-screen ads
+com.amazon.kso.blackbird              | ads       | Special Offers content service
+com.amazon.device.metrics             | telemetry | Device metrics (usage reporting)
+com.amazon.device.crashmanager        | telemetry | Crash reporting
+com.amazon.ags.app                    | junk      | Amazon GameCircle
+com.amazon.hedwig                     | junk      | Help
+com.amazon.kindle.rdmdeviceadmin      | ask       | Remote device admin (Kindle for Enterprise)
+
+# ---- ask: Amazon services you may use (keep the Appstore if you install Amazon apps)
+com.amazon.venezia                    | ask       | Amazon Appstore (also updates Amazon's own apps)
+com.amazon.dee.app                    | ask       | Alexa
+com.amazon.tahoe                      | ask       | Amazon Kids / FreeTime
+com.amazon.parentalcontrols           | ask       | Parental controls
+com.amazon.kindle                     | ask       | Kindle
+com.amazon.mp3                        | ask       | Amazon Music
+com.amazon.avod                       | ask       | Prime Video
+com.amazon.photos                     | ask       | Amazon Photos
+com.amazon.cloud9                     | ask       | Silk browser
+com.amazon.weather                    | ask       | Weather
+com.amazon.windowshop                 | ask       | Amazon Shopping
+com.amazon.audible                    | ask       | Audible
+com.amazon.csapp                      | ask       | Customer service / Mayday

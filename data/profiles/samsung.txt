@@ -1,0 +1,77 @@
+# Samsung (One UI). Format: package | category | note   (see generic.txt for the rules)
+
+# ---- ads, profiling, telemetry
+com.samsung.android.rubin.app         | telemetry | Customization Service: profiles everything you do to target ads and "suggestions"
+com.samsung.android.app.spage         | ads       | Samsung Free (ex Bixby Home): the news/ads feed left of the home screen
+com.samsung.android.smartsuggestions  | telemetry | Smart suggestions (app/contact suggestions built from usage data)
+com.samsung.android.beaconmanager     | telemetry | SmartThings beacon manager: scans for Bluetooth beacons in the background
+com.samsung.android.bbc.bbcagent      | telemetry | Bug reporting agent
+com.samsung.android.voc               | ask       | Samsung Members (support app; also diagnostics and feedback uploads)
+com.sec.android.app.samsungapps       | ask       | Galaxy Store (needed to update Samsung apps, Wallet and Wearable)
+com.samsung.android.app.updatecenter  | ask       | Samsung app update center
+com.samsung.android.game.gos          | ask       | Game Optimizing Service (throttles games; some people want it gone)
+com.samsung.android.game.gamehome     | ask       | Game Launcher
+com.samsung.android.game.gametools    | ask       | Game Booster overlay
+
+# ---- preloaded clutter
+com.samsung.android.app.tips          | junk      | Tips
+com.samsung.android.mateagent         | junk      | Galaxy Friends (accessory content)
+com.samsung.android.kidsinstaller     | junk      | Samsung Kids installer
+com.sec.android.app.kidshome          | junk      | Samsung Kids
+com.samsung.android.app.watchmanagerstub | junk   | Galaxy Wearable installer stub
+com.samsung.android.aremoji           | junk      | AR Emoji
+com.samsung.android.ardrawing         | junk      | AR Doodle
+com.samsung.android.arzone            | junk      | AR Zone
+com.samsung.android.livestickers      | junk      | AR stickers
+com.samsung.android.tvplus            | junk      | Samsung TV Plus
+com.samsung.android.coldwalletservice | junk      | Samsung Blockchain Keystore
+com.sec.android.easyMover.Agent       | junk      | Smart Switch agent (installer stub)
+com.samsung.android.drivelink.stub    | junk      | Car mode stub
+com.samsung.android.app.taskedge      | junk      | Tasks edge panel
+com.samsung.android.service.peoplestripe | junk   | People edge panel
+com.samsung.android.app.clipboardedge | junk      | Clipboard edge panel
+com.samsung.android.app.appsedge      | ask       | Apps edge panel
+com.samsung.android.app.cocktailbarservice | ask  | Edge panels (all of them)
+
+# ---- Bixby
+com.samsung.android.bixby.agent       | ask       | Bixby Voice
+com.samsung.android.bixby.wakeup      | ask       | Bixby wake-up ("Hi Bixby")
+com.samsung.android.bixbyvision.framework | ask   | Bixby Vision
+com.samsung.android.visionintelligence| ask       | Bixby Vision intelligence
+com.samsung.android.app.routines      | ask       | Modes and Routines (automation; many people use it)
+
+# ---- Samsung services: keep the ones you use
+com.samsung.android.spay              | ask       | Samsung Wallet / Samsung Pay
+com.samsung.android.spayfw            | ask       | Samsung Pay framework
+com.sec.android.app.billing           | ask       | Samsung Checkout (in-app purchases in Samsung apps)
+com.samsung.android.samsungpass       | ask       | Samsung Pass
+com.samsung.android.samsungpassautofill | ask     | Samsung Pass autofill
+com.samsung.android.oneconnect        | ask       | SmartThings
+com.samsung.android.easysetup         | ask       | SmartThings easy setup (scans for nearby devices)
+com.samsung.android.scloud            | ask       | Samsung Cloud
+com.samsung.android.fmm               | ask       | Find My Mobile (keep if you rely on it)
+com.samsung.android.mdx               | ask       | Link to Windows service
+com.samsung.android.smartmirroring    | ask       | Smart View (screen mirroring)
+com.samsung.android.allshare.service.mediashare | ask | Media sharing to nearby devices
+com.samsung.android.aware.service     | ask       | Quick Share (nearby device discovery)
+com.samsung.android.app.sharelive     | ask       | Quick Share (link sharing)
+com.samsung.android.privateshare      | ask       | Private Share
+com.samsung.android.mcfserver         | ask       | Continuity service (Buds auto switch, multi-device)
+com.samsung.android.app.watchmanager  | ask       | Galaxy Wearable
+com.sec.android.app.shealth           | ask       | Samsung Health
+com.samsung.android.forest            | ask       | Digital Wellbeing (Samsung)
+com.samsung.android.dynamiclock       | ask       | Dynamic Lock screen (rotating wallpapers; carries Glance content in some regions)
+com.samsung.android.sm.devicesecurity | ask       | Device Care malware scan (McAfee)
+com.samsung.android.service.aircommand| ask       | Air command (S Pen)
+
+# ---- Samsung apps that duplicate Google's
+com.sec.android.app.sbrowser          | ask       | Samsung Internet
+com.samsung.android.app.notes         | ask       | Samsung Notes
+com.samsung.android.app.reminder      | ask       | Reminder
+com.samsung.android.calendar          | ask       | Samsung Calendar
+com.samsung.android.email.provider    | ask       | Samsung Email
+com.sec.android.app.voicenote         | ask       | Voice Recorder
+com.sec.android.app.popupcalculator   | ask       | Calculator
+com.sec.android.daemonapp             | ask       | Samsung Weather
+com.samsung.android.themestore        | ask       | Galaxy Themes
+com.sec.android.easyMover             | ask       | Smart Switch

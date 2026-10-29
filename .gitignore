@@ -1,0 +1,7 @@
+# device snapshots, plans and records: local only, may hold settings dumps
+backups/
+
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
