@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: I want this for my family's phones
+    url: https://github.com/DoAideAi/DoAide-Debloat/issues/new?labels=interest-family&title=%5Binterest%5D+family&body=Which+phones%3F+What+would+you+want+done+for+you%3F
+    about: Tell us which phones and what you would want done for you. One line is enough.
+  - name: I want this for a business (refurbishers, bulk device setup)
+    url: https://github.com/DoAideAi/DoAide-Debloat/issues/new?labels=interest-business&title=%5Binterest%5D+business&body=How+many+devices%2C+which+brands%2C+what+would+a+finished+device+look+like%3F
+    about: Fleet provisioning, refurbishment, bulk setup. Say how many devices and which brands.

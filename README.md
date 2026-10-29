@@ -56,6 +56,14 @@ Nothing is ever deleted from the system image. `--allow-uninstall` opts into
 
 Fifteen minutes, including the questions.
 
+## Quick start: as an installed skill
+
+If your agent supports skills you do not even need to clone first:
+`npx skills add DoAideAi/DoAide-Debloat` (skills.sh) installs
+[`skills/android-debloat/SKILL.md`](skills/android-debloat/SKILL.md) into Claude Code, Codex,
+Cursor and others; Hermes and OpenClaw users can point their skills hub at the same path. The skill
+tells the agent to clone this repo and follow `AGENTS.md`.
+
 ## Quick start: by hand
 
 ```sh
@@ -93,7 +101,11 @@ Wi-Fi) and use the `--serial ip:port` it prints for every other command.
 
 "Community-verified" means every non-`ask` entry is marked Recommended or Advanced in the
 [UAD](https://github.com/Universal-Debloater-Alliance/universal-android-debloater-next-generation)
-list (`tools/validate_lists.py --uad` enforces this). The list format is one line per package:
+list (`tools/validate_lists.py --uad` enforces this). "Device-verified" means someone ran the
+full loop, including restore, on that model and filed a
+[device report](https://github.com/DoAideAi/DoAide-Debloat/issues/new?template=device-report.yml).
+Ran it on yours? That report is the most useful thing you can send: the next person with your
+model skips the discovery. The list format is one line per package:
 
 ```
 com.miui.msa.global | ads       | MSA (MIUI System Ads): the ads inside Settings, Security, Cleaner, Themes

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DoAide Debloat: take the ads and tracking out of your Android phone</title>
+<meta name="description" content="Point your coding agent at a repo and say 'clean up my phone'. No root, nothing uninstalled, one-line undo. Samsung, Xiaomi, OnePlus, vivo, Motorola, Pixel, Fire tablets.">
+<meta property="og:title" content="DoAide Debloat">
+<meta property="og:description" content="dumbtv for the rest of your devices. Ads, tracking and preloaded junk out of any Android phone over ADB. No root. One-line undo.">
+<meta property="og:url" content="https://debloat.doaide.com/">
+<style>
+  :root { --fg:#111; --muted:#555; --line:#e5e5e5; --accent:#0a66ff; --bg:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --fg:#eee; --muted:#aaa; --line:#2a2a2a; --accent:#6ea8ff; --bg:#0d0d0d; } }
+  * { box-sizing:border-box }
+  body { margin:0; font:17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--fg); background:var(--bg) }
+  main { max-width:760px; margin:0 auto; padding:56px 20px 80px }
+  h1 { font-size:2.2rem; line-height:1.15; margin:0 0 .4em; letter-spacing:-.01em }
+  h2 { font-size:1.25rem; margin:2.2em 0 .6em }
+  p.lead { font-size:1.2rem; color:var(--muted); margin:0 0 1.4em }
+  a { color:var(--accent) }
+  .cta { display:inline-block; padding:12px 18px; border-radius:8px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; margin:4px 8px 4px 0 }
+  .cta.alt { background:transparent; color:var(--accent); border:1px solid var(--accent) }
+  pre { background:rgba(127,127,127,.12); padding:14px 16px; border-radius:8px; overflow:auto; font-size:.92rem }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace }
+  table { border-collapse:collapse; width:100%; font-size:.95rem }
+  td, th { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top }
+  ol li { margin:.4em 0 }
+  .small { color:var(--muted); font-size:.9rem }
+  footer { margin-top:3em; color:var(--muted); font-size:.9rem }
+</style>
+</head>
+<body>
+<main>
+  <h1>Your phone should do what you paid for.</h1>
+  <p class="lead">Ads on the lock screen, "hot apps" pushes, a service that profiles everything you do, three app stores. Point your coding agent at one repository and say <em>clean up my phone</em>. No root. Nothing uninstalled. One-line undo.</p>
+
+  <p>
+    <a class="cta" href="https://github.com/DoAideAi/DoAide-Debloat">Get it on GitHub</a>
+    <a class="cta alt" href="https://github.com/DoAideAi/DoAide-Debloat/blob/main/PROMPT.md">The prompt</a>
+  </p>
+
+  <h2>Three steps, fifteen minutes</h2>
+  <ol>
+    <li><strong>On the phone:</strong> Settings &rsaquo; About phone &rsaquo; tap <em>Build number</em> seven times, then Developer options &rsaquo; <em>USB debugging</em> on. Plug it into your computer, or use Wireless debugging.</li>
+    <li><strong>On the computer:</strong> install <code>adb</code>, then<br>
+      <pre>git clone https://github.com/DoAideAi/DoAide-Debloat &amp;&amp; cd DoAide-Debloat</pre>
+      Open Claude Code, Codex, Hermes or Gemini CLI in that folder and say: <em>Clean up my Samsung phone. Follow AGENTS.md.</em></li>
+    <li><strong>Answer one checklist:</strong> which of the optional apps (Samsung Pay, Bixby, Mi Video, Alexa&hellip;) you actually use. Only what you do not tick is turned off.</li>
+  </ol>
+  <p class="small">No agent? The same tools run by hand: <code>probe</code>, <code>backup</code>, <code>plan</code>, <code>apply</code>, <code>restore</code>. Python 3.9+ and adb, nothing else.</p>
+
+  <h2>What it will not do</h2>
+  <table>
+    <tr><th>Never</th><td>Root, remount, flash, factory reset, or delete anything from the system image.</td></tr>
+    <tr><th>Never touches</th><td>Your home screen, keyboard, phone, messages, browser and emergency apps, read live from the device; Play Services; account, security and update services.</td></tr>
+    <tr><th>Always</th><td>Backs up first, disables one package per command, re-checks the phone afterwards, and leaves a record file: <code>restore --record &lt;file&gt;</code> puts everything back.</td></tr>
+  </table>
+
+  <h2>Devices</h2>
+  <table>
+    <tr><th>OnePlus (OxygenOS 16)</th><td>Device-verified, full loop including restore.</td></tr>
+    <tr><th>Samsung, Xiaomi / Redmi / POCO, OPPO / realme, vivo / iQOO, Motorola, Pixel</th><td>Profiles cross-checked against the Universal Android Debloater community list; device reports wanted.</td></tr>
+    <tr><th>Amazon Fire tablets</th><td>Special Offers and Amazon services, from community lists.</td></tr>
+    <tr><th>Android TV, Fire TV</th><td>Use <a href="https://github.com/Gathin23/cleanyourtv">cleanyourtv</a> and <a href="https://github.com/humblemuzzu/dumbtv">dumbtv</a>. This is the phone version.</td></tr>
+  </table>
+
+  <h2>Ran it on yours?</h2>
+  <p>Send a <a href="https://github.com/DoAideAi/DoAide-Debloat/issues/new?template=device-report.yml">device report</a>: what the plan showed, what was refused, what you kept. The next person with your model skips the discovery.</p>
+
+  <h2>Want it done for you?</h2>
+  <p>
+    <a class="cta alt" href="https://github.com/DoAideAi/DoAide-Debloat/issues/new?labels=interest-family&amp;title=%5Binterest%5D+family">For my family's phones</a>
+    <a class="cta alt" href="https://github.com/DoAideAi/DoAide-Debloat/issues/new?labels=interest-business&amp;title=%5Binterest%5D+business">For a business (bulk devices)</a>
+  </p>
+
+  <footer>
+    Free and open source, MIT. A <a href="https://doaide.com">DoAide</a> project. Not affiliated with Google, Samsung, Xiaomi, OnePlus, Amazon or any manufacturer. This page sets no cookies.
+  </footer>
+</main>
+</body>
+</html>

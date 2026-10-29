@@ -1,7 +1,10 @@
 # Contributing
 
 The most useful contribution is a report from a real device: which model, what the plan showed,
-what worked, what had to be kept. The second most useful is a profile line.
+what worked, what had to be kept. File it with the
+[device report form](https://github.com/DoAideAi/DoAide-Debloat/issues/new?template=device-report.yml);
+it asks exactly the questions a profile line needs and refuses identifiers. The second most useful
+is a profile line.
 
 ## Adding or changing a profile line
 
