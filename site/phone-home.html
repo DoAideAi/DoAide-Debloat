@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phone-Home Index: what Android phones send home when nobody is using them</title>
+<meta name="description" content="How many ad and tracking servers each Android phone model contacts in ten idle minutes, before and after debloating. Crowd-sourced X-ray reports, each linked to its source.">
+<meta property="og:title" content="Phone-Home Index">
+<meta property="og:description" content="Ten idle minutes, lock screen woken ten times: how many ad and tracking servers does your phone talk to?">
+<meta property="og:url" content="https://debloat.doaide.com/phone-home.html">
+<style>
+  :root { --fg:#111; --muted:#555; --line:#e5e5e5; --accent:#0a66ff; --bg:#fff; --red:#c0233f; --green:#13804a; }
+  @media (prefers-color-scheme: dark) { :root { --fg:#eee; --muted:#aaa; --line:#2a2a2a; --accent:#6ea8ff; --bg:#0d0d0d; --red:#ff6b81; --green:#7be0a6; } }
+  * { box-sizing:border-box }
+  body { margin:0; font:17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--fg); background:var(--bg) }
+  main { max-width:980px; margin:0 auto; padding:56px 20px 80px }
+  h1 { font-size:2.2rem; line-height:1.15; margin:0 0 .4em; letter-spacing:-.01em }
+  h2 { font-size:1.25rem; margin:2.2em 0 .6em }
+  p.lead { font-size:1.2rem; color:var(--muted); margin:0 0 1.4em }
+  a { color:var(--accent) }
+  .cta { display:inline-block; padding:12px 18px; border-radius:8px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; margin:4px 8px 4px 0 }
+  .cta.alt { background:transparent; color:var(--accent); border:1px solid var(--accent) }
+  table { border-collapse:collapse; width:100%; font-size:.95rem }
+  td, th { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top }
+  td.num { font-variant-numeric:tabular-nums; font-weight:700 }
+  .before { color:var(--red) } .after { color:var(--green) }
+  .small { color:var(--muted); font-size:.9rem }
+  footer { margin-top:3em; color:var(--muted); font-size:.9rem }
+</style>
+</head>
+<body>
+<main>
+  <h1>What does your phone send home?</h1>
+  <p class="lead">Ten minutes, phone untouched, lock screen woken ten times. Each row is the median of the X-ray reports filed by owners of that model: how many ad and tracking servers it talked to, before and after debloating.</p>
+  <p>
+    <a class="cta" href="https://github.com/DoAideAi/DoAide-Debloat/blob/main/recipes/xray.md">X-ray your phone</a>
+    <a class="cta alt" href="index.html">DoAide Debloat</a>
+  </p>
+  <p><strong>No reports yet.</strong> Be the first: run the X-ray before and after debloating, and the <code>card</code> step prints a link that files your report.</p>
+  <h2>How it is measured</h2>
+  <ul>
+    <li>PCAPdroid, an open-source app that needs no root, records the phone's traffic for ten idle minutes. The lock screen is woken ten times, the way a person glances at a phone.</li>
+    <li>Server names come from DNS, the TLS server name and the HTTP Host header. Nothing is decrypted.</li>
+    <li>A server counts as ad or tracking when one of <a href="https://github.com/hagezi/dns-blocklists">HaGeZi's lists</a> names it: the phone makers' own telemetry, and the broad Pro list. <a href="https://reports.exodus-privacy.eu.org/en/trackers/">Exodus Privacy</a> supplies the company names.</li>
+    <li>Counts vary from run to run with the network, the time of day and app updates. A row with one report is one phone on one evening.</li>
+    <li>Reports are filed by their owners as public GitHub issues and hold counts, plus the tracker domains and package names of preinstalled apps. Never serial numbers, IP addresses or the owner's own apps.</li>
+  </ul>
+  <footer>
+    Updated 2026-10-30. 0 reports. Free and open source, MIT. A <a href="https://doaide.com">DoAide</a> project. Not affiliated with any manufacturer. This page sets no cookies.
+  </footer>
+</main>
+</body>
+</html>

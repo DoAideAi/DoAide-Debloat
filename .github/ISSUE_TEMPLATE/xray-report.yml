@@ -1,0 +1,49 @@
+name: X-ray report
+description: Add your phone to the Phone-Home Index. The link that `tools/xray.py card` prints fills this in.
+title: "[x-ray] <brand> <model>"
+labels: ["xray-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks. The report below holds counts, plus the tracker domains and package names of
+        preinstalled apps. It never holds a serial number, IP addresses, other sites, or anything
+        about apps you installed yourself. Read it before you submit, and leave the numbers as they are.
+  - type: input
+    id: device
+    attributes:
+      label: Brand and model
+      placeholder: "Redmi Note 13 5G (2312DRAABI)"
+    validations:
+      required: true
+  - type: dropdown
+    id: market
+    attributes:
+      label: Where was the phone sold?
+      description: The index compares the same model across countries; firmware differs by market.
+      options:
+        - India
+        - Another country
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: X-ray report (share.json)
+      description: "Filled in by the link `card` prints. Otherwise paste backups/xray-card-<model>-<time>/share.json."
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: "e.g. Wi-Fi or mobile data during the captures, which apps you kept, anything that looked odd"
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I read the report. It has no serial number, IMEI, phone number, account email, Wi-Fi name or IP address.
+          required: true
