@@ -96,3 +96,60 @@ the artifact, three lines on what it does, the OxygenOS finding, the link.
 Merge profile reports fast. Add a "Tested devices" table to the README as reports arrive. Pin a
 "send your model + plan output" issue. Once stars arrive: GitHub Sponsors and a sponsor line in
 the README.
+
+## 7. Parent mode, for Diwali (Lakshmi Puja: Sunday 8 November 2026)
+
+Its own pitch, same repo, so the stars land in one place. The hook is the trip home: people
+travel 5–7 November, so it goes out on Wednesday 4 November.
+
+**Gate (no exceptions):** a clean real run on at least three phones from different brands
+(Samsung, Xiaomi/Redmi, and vivo, OPPO or realme), each one audited, compared with the phone's own
+Settings screens, one `[auto]` and one `[ask]` change applied, restored, applied again, then
+`finish`. Breaking a parent's phone at Diwali is the worst possible demo. The card in the posts
+comes from one of those runs.
+
+**The artifact:** the card (counts only), plus a 30-second recording: `parent audit` showing
+FIX NOW, the owner saying yes, `apply` ending in "Verified", the card.
+
+**Never post:** an audit, an app list, the parent's screen, or "scam-proof". It is harder to scam.
+
+### X (Wednesday 4 Nov, 19:00 IST)
+
+> Going home for Diwali? Do this to your parents' phone.
+>
+> Plugged [Mum's] phone into my laptop, told Claude Code "make this phone safe".
+> It found [AnyDesk, installed during a "KYC update" call], [2] apps allowed to install APK files
+> from WhatsApp, and [an app that could read her OTPs].
+>
+> Read-only check first. Nothing deleted. Every change undoable. USB debugging off at the end.
+
+First reply: the repo link, "Claude Code, Codex, Hermes, Gemini CLI. No root. MIT." Second reply:
+"It makes a card with counts only, no app names. Share yours, tag the sibling who's going home."
+
+### LinkedIn (same evening)
+
+Lead with the number: Indians lost ₹1,935 crore to "digital arrest" scams in 2024 and ₹647 crore in
+January–August 2026, and on 29 October the Supreme Court proposed making banks share the loss
+([Indian Express](https://indianexpress.com/article/explained/digital-arrest-scams-supreme-court-rbi-bank-liability-explained-10943089)).
+Then the visit home, what the audit found on [the real phone], the card.
+
+### Hacker News (Thursday 5 Nov, ~12:00 UTC)
+
+> Show HN: Make your parents' Android phone harder to scam with a coding agent (adb, reversible)
+
+Text: what scams in India use (remote-control apps, APKs over WhatsApp, OTP-reading accessibility
+and notification access, loan apps reading contacts); how the audit reads it (`dumpsys package`
+install source and initiating app, the REQUEST_INSTALL_PACKAGES app-op, accessibility and
+notification-access settings, device admins); that every change is read back and recorded; that the
+card is counts-only by construction. Add one hardware finding [from the real runs].
+
+### WhatsApp (the channel that matters here)
+
+A forward for family and college groups: the card image, one line ("checked Mum's phone for
+scam apps before Diwali, 20 minutes, nothing deleted"), the repo link. [Hindi and regional
+versions: written by native speakers, not machine-translated.]
+
+### Press
+
+Indian outlets with the Supreme Court angle: Moneycontrol, Economic Times Tech, Gadgets360,
+Beebom. TechCrunch (the 19 Oct smart-TV story) for the "agents doing family IT" angle.

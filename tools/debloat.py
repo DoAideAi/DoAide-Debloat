@@ -9,6 +9,7 @@
     check    report (and optionally fix) what a firmware update re-enabled
     lookup   what a package is, from the bundled profiles and the community (UAD) list
     connect  adb connect / pair helpers for Wi-Fi debugging
+    parent   parent mode: make a parent's phone harder to scam (recipes/parent-mode.md)
 
 Design rules the code enforces, not just documents:
   * nothing is ever uninstalled from the system image; `pm disable-user` is the default,
@@ -1092,6 +1093,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--pair", help="ip:port shown under 'Pair device with pairing code'")
     p.add_argument("--code", help="the six-digit pairing code")
     p.set_defaults(func=cmd_connect)
+
+    p = sub.add_parser("parent", help="parent mode: make a parent's phone harder to scam "
+                                      "(audit, apply, restore, card, finish)")
+    import parent  # late: parent.py imports this module
+    parent.add_commands(p)
     return parser
 
 
@@ -1105,4 +1111,5 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
 
 if __name__ == "__main__":
+    sys.modules.setdefault("debloat", sys.modules[__name__])   # parent.py's `import debloat` is this module
     sys.exit(main())

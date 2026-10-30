@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make your parents' phone harder to scam | DoAide Debloat parent mode</title>
+<meta name="description" content="Going home for Diwali? Plug in your parents' phone, open your coding agent and say 'make this phone safe'. A read-only check first, changes only with their yes, nothing deleted, USB debugging off at the end.">
+<meta property="og:title" content="Make your parents' phone harder to scam">
+<meta property="og:description" content="Remote-control apps, fake KYC APKs over WhatsApp, apps that read OTPs: checked in twenty minutes with your coding agent. Nothing deleted. Every change undoable.">
+<meta property="og:url" content="https://parents.doaide.com/">
+<style>
+  :root { --fg:#111; --muted:#555; --line:#e5e5e5; --accent:#c75b00; --bg:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --fg:#eee; --muted:#aaa; --line:#2a2a2a; --accent:#ff9f1c; --bg:#0d0d0d; } }
+  * { box-sizing:border-box }
+  body { margin:0; font:17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--fg); background:var(--bg) }
+  main { max-width:760px; margin:0 auto; padding:56px 20px 80px }
+  h1 { font-size:2.2rem; line-height:1.15; margin:0 0 .4em; letter-spacing:-.01em }
+  h2 { font-size:1.25rem; margin:2.2em 0 .6em }
+  p.lead { font-size:1.2rem; color:var(--muted); margin:0 0 1.4em }
+  a { color:var(--accent) }
+  .cta { display:inline-block; padding:12px 18px; border-radius:8px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; margin:4px 8px 4px 0 }
+  .cta.alt { background:transparent; color:var(--accent); border:1px solid var(--accent) }
+  pre { background:rgba(127,127,127,.12); padding:14px 16px; border-radius:8px; overflow:auto; font-size:.92rem }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace }
+  table { border-collapse:collapse; width:100%; font-size:.95rem }
+  td, th { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top }
+  ol li { margin:.4em 0 }
+  .small { color:var(--muted); font-size:.9rem }
+  figure { margin:1.2em 0 }
+  figure svg { width:min(100%, 420px); height:auto; border-radius:14px; display:block }
+  figcaption { color:var(--muted); font-size:.85rem; margin-top:.5em }
+  footer { margin-top:3em; color:var(--muted); font-size:.9rem }
+</style>
+</head>
+<body>
+<main>
+  <h1>Make your parents' phone harder to scam.</h1>
+  <p class="lead">Going home for Diwali? Plug in their phone, open your coding agent and say <em>make this phone safe</em>. Twenty minutes: a read-only check first, changes only with their yes, nothing deleted, USB debugging off at the end.</p>
+
+  <p>
+    <a class="cta" href="https://github.com/DoAideAi/DoAide-Debloat">Get it on GitHub</a>
+    <a class="cta alt" href="https://github.com/DoAideAi/DoAide-Debloat/blob/main/recipes/parent-mode.md">How it works</a>
+  </p>
+
+  <h2>What scams use, and what it checks</h2>
+  <table>
+    <tr><th>A caller "from the bank" or "the police" asks them to install AnyDesk or TeamViewer and read out a code</th><td>Remote-control apps are flagged and switched off if they agree. If the family uses one to help, it stays.</td></tr>
+    <tr><th>A fake "KYC update" or "electricity bill" app arrives as an APK file on WhatsApp</th><td>WhatsApp, Chrome and file managers lose the right to install apps. They keep working; installing from the Play Store is unaffected.</td></tr>
+    <tr><th>An app reads one-time passwords from SMS, the screen or notifications</th><td>Apps from outside an app store lose SMS, contacts and call-log access, and third-party accessibility and notification access is removed, with their yes. Banking and UPI apps from the Play Store keep SMS access.</td></tr>
+    <tr><th>Things adb cannot change</th><td>Device admins, the default SMS app, Play Protect, an old security update, WhatsApp storage: step-by-step instructions to do together.</td></tr>
+  </table>
+
+  <h2>Three steps</h2>
+  <ol>
+    <li><strong>On the phone:</strong> Settings &rsaquo; About phone &rsaquo; tap <em>Build number</em> seven times, then Developer options &rsaquo; <em>USB debugging</em> on. Plug it into your computer.</li>
+    <li><strong>On the computer:</strong> install <code>adb</code>, then<br>
+      <pre>git clone https://github.com/DoAideAi/DoAide-Debloat &amp;&amp; cd DoAide-Debloat</pre>
+      Open Claude Code, Codex, Hermes or Gemini CLI in that folder and say: <em>Make this phone safe. Follow recipes/parent-mode.md.</em></li>
+    <li><strong>Do the rest together:</strong> WhatsApp's <em>Silence unknown callers</em> and two-step verification, a family code word for any call that asks for money, and 1930 saved as the cyber crime helpline. No police officer, bank or courier asks anyone to install an app or stay on a video call: "digital arrest" does not exist.</li>
+  </ol>
+
+  <h2>What it will not do</h2>
+  <table>
+    <tr><th>Never</th><td>Uninstall an app, delete a message, a photo or WhatsApp media, root the phone, or change anything before the read-only check has been shown.</td></tr>
+    <tr><th>Never touches</th><td>The home screen, keyboard, phone, messages and browser apps, read live from the phone.</td></tr>
+    <tr><th>Always</th><td>Reads every change back from the phone, records it, and undoes all of it with one command. Switches USB debugging off at the end. If it cannot read part of a phone, it says so instead of calling the phone clean.</td></tr>
+  </table>
+
+  <h2>A card to share, without anything personal</h2>
+  <p>At the end it makes a card with counts only: never app names, the phone model or whose phone it is.</p>
+  <figure>
+    <svg role="img" aria-label="Example card: 5 scam risks fixed on Mum's phone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#1d1238"/><stop offset="1" stop-color="#0b0b12"/></linearGradient><radialGradient id="glow" cx="0.85" cy="0.12" r="0.45"><stop offset="0" stop-color="#ff9f1c" stop-opacity="0.35"/><stop offset="1" stop-color="#ff9f1c" stop-opacity="0"/></radialGradient></defs>
+<rect width="1080" height="1350" fill="url(#bg)"/>
+<rect width="1080" height="1350" fill="url(#glow)"/>
+<text x="80" y="200" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="34" font-weight="700" fill="#8be0b5" text-anchor="start" letter-spacing="6">PHONE SAFETY CHECK</text>
+<text x="80" y="500" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="300" font-weight="800" fill="#ffd166" text-anchor="start">5</text>
+<text x="80" y="590" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="72" font-weight="700" fill="#f2f2f2" text-anchor="start">scam risks fixed</text>
+<text x="80" y="650" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="40" font-weight="400" fill="#a9b0c3" text-anchor="start">on Mum's phone  ·  9 found</text>
+<circle cx="97" cy="728" r="17" fill="#8be0b5" fill-opacity="0.16"/><path d="M 89 728 l 5 6 l 10 -12" fill="none" stroke="#8be0b5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="740" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="38" font-weight="500" fill="#f2f2f2" text-anchor="start">2 apps can no longer install APK files</text>
+<circle cx="97" cy="792" r="17" fill="#8be0b5" fill-opacity="0.16"/><path d="M 89 792 l 5 6 l 10 -12" fill="none" stroke="#8be0b5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="804" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="38" font-weight="500" fill="#f2f2f2" text-anchor="start">1 remote-control app switched off</text>
+<circle cx="97" cy="856" r="17" fill="#8be0b5" fill-opacity="0.16"/><path d="M 89 856 l 5 6 l 10 -12" fill="none" stroke="#8be0b5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="868" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="37" font-weight="500" fill="#f2f2f2" text-anchor="start">1 app lost screen or notification access</text>
+<circle cx="97" cy="920" r="17" fill="#8be0b5" fill-opacity="0.16"/><path d="M 89 920 l 5 6 l 10 -12" fill="none" stroke="#8be0b5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="932" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="36" font-weight="500" fill="#f2f2f2" text-anchor="start">2 SMS and contacts permissions taken back</text>
+<circle cx="97" cy="984" r="17" fill="#8be0b5" fill-opacity="0.16"/><path d="M 89 984 l 5 6 l 10 -12" fill="none" stroke="#8be0b5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="996" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="38" font-weight="500" fill="#f2f2f2" text-anchor="start">USB debugging switched off again</text>
+<rect x="80" y="1032" width="920" height="2" fill="#ffffff" fill-opacity="0.14"/>
+<text x="80" y="1090" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="44" font-weight="700" fill="#f2f2f2" text-anchor="start">Make your parents' phone harder to scam</text>
+<text x="80" y="1146" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="34" font-weight="400" fill="#a9b0c3" text-anchor="start">Free and open source. Every change can be undone.</text>
+<circle cx="92" cy="1215" r="12" fill="#ff9f1c"/>
+<text x="116" y="1227" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="36" font-weight="700" fill="#f2f2f2" text-anchor="start">DoAide Debloat  ·  parent mode</text>
+<text x="116" y="1270" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="28" font-weight="400" fill="#a9b0c3" text-anchor="start">github.com/DoAideAi/DoAide-Debloat</text>
+<text x="80" y="1318" font-family="Inter, &#x27;SF Pro Display&#x27;, &#x27;Segoe UI&#x27;, Roboto, &#x27;Noto Sans&#x27;, &#x27;Noto Sans Devanagari&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif" font-size="22" font-weight="400" fill="#a9b0c3" text-anchor="start" opacity="0.8">No app names, phone numbers or personal details on this card.</text>
+</svg>
+    <figcaption>Example from a test run on a simulated phone. Yours shows what was actually changed.</figcaption>
+  </figure>
+
+  <h2>If money has already been lost</h2>
+  <p>Call <strong>1930</strong>, the National Cyber Crime Helpline, at once and report at <a href="https://cybercrime.gov.in">cybercrime.gov.in</a>. Call the bank to block the account and cards. Do not install anything a caller suggests to "recover" the money.</p>
+
+  <h2>Status</h2>
+  <p>New, and part of <a href="https://debloat.doaide.com">DoAide Debloat</a>. Tested against a simulated phone; not yet on many real ones. Ran it? A <a href="https://github.com/DoAideAi/DoAide-Debloat/issues/new?template=device-report.yml">device report</a> (model and what the check showed, nothing personal) makes it safer for the next family.</p>
+
+  <footer>
+    Free and open source, MIT. A <a href="https://doaide.com">DoAide</a> project. Not affiliated with any bank, government agency, phone maker or app named on this page. This page sets no cookies.
+  </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Remote-control and screen-sharing apps that let someone else see or control THIS phone.
+# Scam callers posing as bank, courier or police staff ask people to install one of these and read
+# out the code. Parent mode flags them when installed and enabled; the owner decides (they are
+# never switched off unasked: some families use them to help their parents).
+#
+# Format: package name or glob | note (the first words before ':' are the app's name).
+# Every name checked against its Google Play listing on 2026-10-30. Controller-only apps (used to
+# control a computer FROM the phone, e.g. AnyViewer, Chrome Remote Desktop) are deliberately absent.
+
+com.anydesk.*                    | AnyDesk: anyone with the code can see and control this phone (includes its control plugins)
+com.teamviewer.quicksupport.*    | TeamViewer QuickSupport: anyone with the code can see and control this phone
+com.teamviewer.host.*            | TeamViewer Host: unattended remote control of this phone
+com.carriez.flutter_hbb          | RustDesk: remote control of this phone through an accessibility service
+com.sand.airdroid                | AirDroid: remote access to this phone, its files and screen from a computer
+com.sand.airsos                  | AirDroid Remote Support: screen sharing and control with a 9-digit code
+com.zoho.assist.agent            | Zoho Assist: screen sharing and remote control by a "technician"

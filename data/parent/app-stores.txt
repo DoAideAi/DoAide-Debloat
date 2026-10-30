@@ -1,0 +1,16 @@
+# Installers that count as an app store. An app installed by anything else (the package installer
+# after a download, WhatsApp, a file manager, adb) counts as "installed from outside an app store".
+# Exact package names; each one cross-checked against the community UAD list on 2026-10-30.
+# Left out on purpose: com.transsnet.store (Palm Store), which the community list flags as a store
+# with unsafe apps.
+
+com.android.vending              | Google Play Store
+com.google.android.feedback      | Google Play (old Play installs record this installer)
+com.sec.android.app.samsungapps  | Samsung Galaxy Store
+com.xiaomi.mipicks               | Xiaomi GetApps
+com.xiaomi.market                | Xiaomi GetApps (older name)
+com.heytap.market                | OPPO / OnePlus / realme App Market
+com.oppo.market                  | OPPO App Market (older name)
+com.bbk.appstore                 | vivo App Store
+com.huawei.appmarket             | Huawei AppGallery
+com.amazon.venezia               | Amazon Appstore

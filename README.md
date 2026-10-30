@@ -129,7 +129,8 @@ com.samsung.android.spay | ask  | Samsung Wallet / Samsung Pay
 * A plan is bound to the device it was made for.
 * Backups and records contain no serial number, only a hash; `backups/` is git-ignored.
 
-A debloated phone is still a phone with ADB enabled. Turn USB debugging off when you are done.
+A debloated phone is still a phone with ADB enabled. Turn USB debugging off when you are done
+(`parent finish` does it).
 
 ## Dumbphone extras
 
@@ -137,12 +138,41 @@ Greyscale, instant animations, a minimal launcher: the optional finishing touche
 flagship as boring as a Light Phone, each with its undo, in
 [recipes/dumbphone.md](recipes/dumbphone.md).
 
+## Parent mode: make a parent's phone harder to scam
+
+For the next visit home: plug in a parent's phone and tell your agent *"make this phone safe,
+follow recipes/parent-mode.md"*. It runs a read-only audit, explains each finding in plain words,
+makes the changes the owner agrees to, goes through what no tool can do, makes a shareable card
+and switches USB debugging off. Nothing is deleted; every change is recorded and undoable.
+
+| The audit finds | What can be done |
+|---|---|
+| Remote-control apps (AnyDesk, TeamViewer QuickSupport, RustDesk, AirDroid...) | switched off, if the owner agrees |
+| Apps allowed to install APK files (WhatsApp, Chrome, file managers...) | denied, by default |
+| Apps from outside an app store that read SMS, contacts or the call log | permission taken back, or the app switched off |
+| Third-party accessibility and notification access, which is how one-time passwords get read | removed, if the owner agrees |
+| Device admins, a sideloaded SMS app, Play Protect off, an old security patch, WhatsApp media | step-by-step instructions (adb cannot change these) |
+
+```sh
+python3 tools/debloat.py parent audit                        # read-only; writes backups/parent-audit-*.json
+python3 tools/debloat.py parent apply --audit <file> --yes   # [auto] changes, plus --fix <id> for [ask] ones
+python3 tools/debloat.py parent card --record <file> --who Mum
+python3 tools/debloat.py parent finish --record <file> --yes # USB and wireless debugging off; last step
+python3 tools/debloat.py parent restore --record <file>      # undo
+```
+
+The card shows counts only: never app names, the phone model or anything personal. If the audit
+cannot read part of a phone, it says so instead of calling the phone clean.
+
+> Status: 29 behaviour tests against a simulated phone. Not yet run on a real one: reports from
+> real phones (especially Samsung, Xiaomi, vivo, OPPO and realme) are the most useful contribution.
+
 ## Development
 
 [![CI](https://github.com/DoAideAi/DoAide-Debloat/actions/workflows/ci.yml/badge.svg)](https://github.com/DoAideAi/DoAide-Debloat/actions/workflows/ci.yml)
 
 ```sh
-python3 -m unittest discover -s tests -v      # 28 tests against a scripted fake device
+python3 -m unittest discover -s tests -v      # behaviour tests against scripted fake devices
 python3 tools/validate_lists.py --uad         # list syntax, duplicates, never-disable overlap, UAD cross-check
 ```
 

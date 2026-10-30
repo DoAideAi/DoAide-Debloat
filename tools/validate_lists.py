@@ -14,6 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import debloat  # noqa: E402
+import parent  # noqa: E402
 import uadlist  # noqa: E402
 
 
@@ -54,6 +55,27 @@ def main() -> int:
     print(f"{len(files)} profiles, {len(entries)} entries, {len(never)} never-disable patterns")
     by_cat = Counter(e.category for e in entries)
     print("  " + ", ".join(f"{c}: {n}" for c, n in sorted(by_cat.items())))
+
+    parent_lists = {}
+    for path in (parent.REMOTE_FILE, parent.STORES_FILE):
+        try:
+            parent_lists[path.name] = parent.load_patterns(path)
+        except ValueError as exc:
+            errors.append(str(exc))
+            continue
+        for pattern, count in Counter(p.pattern for p in parent_lists[path.name]).items():
+            if count > 1:
+                errors.append(f"{path.name}: {pattern} listed {count} times")
+        errors += [f"{path.name}: {p.pattern} has no note" for p in parent_lists[path.name] if not p.note]
+    stores = parent_lists.get(parent.STORES_FILE.name, [])
+    errors += [f"{parent.STORES_FILE.name}: {p.pattern} must be an exact package name"
+               for p in stores if any(c in p.pattern for c in "*?")]
+    for remote in parent_lists.get(parent.REMOTE_FILE.name, []):
+        for store in stores:
+            if debloat.fnmatch.fnmatchcase(store.pattern, remote.pattern):
+                errors.append(f"{parent.REMOTE_FILE.name}: {remote.pattern} matches the app store "
+                              f"{store.pattern}")
+    print("  parent mode: " + ", ".join(f"{name}: {len(p)}" for name, p in parent_lists.items()))
 
     if args.uad:
         db = uadlist.load(offline=args.offline)

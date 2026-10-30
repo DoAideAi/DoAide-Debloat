@@ -48,3 +48,18 @@ Serial numbers, IMEIs, phone numbers, account emails, Wi-Fi names, and the conte
 `data/never-disable.txt` takes glob patterns. Add one when a package is known to boot-loop,
 lock or brick a device if disabled, with a comment saying why. Removing one needs a device
 report showing it is safe.
+
+## Parent mode lists
+
+`data/parent/remote-access.txt` lists apps that let someone else see or control *this* phone;
+`data/parent/app-stores.txt` lists installers that count as an app store. One entry per line,
+`package-or-glob | note`, the note starting with the app's name and a colon.
+
+* Add a remote-access app only after its Play Store listing confirms that a remote person can view
+  or control the phone it is installed on, and say so in the note. Apps that control a computer
+  *from* the phone do not belong.
+* App-store entries are exact package names that the community UAD list knows. A store the UAD
+  list warns about (Palm Store) is left out on purpose.
+
+The validator checks syntax, duplicates and notes, and that no remote-access pattern matches an
+app store.
