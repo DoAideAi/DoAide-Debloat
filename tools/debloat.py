@@ -286,7 +286,8 @@ def probe_device(adb: Adb) -> DeviceState:
         out = adb.shell(f"cmd role get-role-holders {role}", check=False).strip()
         if not out or "Error" in out or "Exception" in out or "not found" in out.lower():
             continue
-        holders = [h for h in re.split(r"[;\s]+", out) if re.fullmatch(r"[A-Za-z0-9_.]+", h)]
+        # "Unknown" is the placeholder for a role with no real holder, not a package
+        holders = [h for h in re.split(r"[;\s]+", out) if re.fullmatch(r"[A-Za-z0-9_.]+", h) and h != "Unknown"]
         if holders:
             roles[role] = holders
     # Android 9 and older: no role manager, fall back to secure settings
